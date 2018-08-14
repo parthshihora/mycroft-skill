@@ -26,8 +26,7 @@ class TemplateSkill(MycroftSkill):
 
     def initialize(self):
         # Creating GreetingsIntent requiring Greetings vocab
-        greetings = IntentBuilder("GreetingsIntent")
-                           .require("Hello").build()
+        greetings = IntentBuilder("GreetingsIntent").require("Hello").build()
         # Associating a callback with the Intent
         self.register_intent(greetings, self.handle_greetings)
 
@@ -47,7 +46,7 @@ class TemplateSkill(MycroftSkill):
     #   'Hello world'
     #   'Howdy you great big world'
     #   'Greetings planet earth'
-    @intent_handler(IntentBuilder("").require("Hello").require("World"))
+    '''@intent_handler(IntentBuilder("").require("Hello").require("World"))
     def handle_hello_world_intent(self, message):
         # In this case, respond by simply speaking a canned response.
         # Mycroft will randomly speak one of the lines from the file
@@ -60,7 +59,7 @@ class TemplateSkill(MycroftSkill):
             self.count += 1
         else:  # assume "down"
             self.count -= 1
-        self.speak_dialog("count.is.now", data={"count": self.count})
+        self.speak_dialog("count.is.now", data={"count": self.count})'''
 
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
