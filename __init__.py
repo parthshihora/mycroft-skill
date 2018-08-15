@@ -10,6 +10,8 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
+import webbrowser,os
+
 
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
@@ -26,13 +28,18 @@ class TemplateSkill(MycroftSkill):
 
     def initialize(self):
         # Creating GreetingsIntent requiring Greetings vocab
-        greetings = IntentBuilder("GreetingsIntent").require("Hello").build()
+        #greetings = IntentBuilder("GreetingsIntent").require("Hello").build()
+        patients = IntentBuilder("ReadPatientIntent").require("Patient").build()
+        self.register_intent(patients,self.handle_patient_read)
         # Associating a callback with the Intent
-        self.register_intent(greetings, self.handle_greetings)
+        #self.register_intent(greetings, self.handle_greetings)
 
-    def handle_greetings(self):
+    def handle_patient_read(self):
+    	webbrowser.open('file://' + os.path.realpath('index.html'))
         # Sending a command to mycroft, speak Greetings Dialog
-        self.speak_dialog("hello.world")
+        self.speak_dialog("patient.read",data={
+        	"patient_data" : "patient is healthy"
+        	})
 
 
     # The "handle_xxxx_intent" function is triggered by Mycroft when the
