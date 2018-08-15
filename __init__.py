@@ -37,9 +37,7 @@ class TemplateSkill(MycroftSkill):
     def handle_patient_read(self):
     	webbrowser.open('file://' + os.path.realpath('index.html'))
         # Sending a command to mycroft, speak Greetings Dialog
-        self.speak_dialog("patient.read",data={
-        	"patient_data" : "patient is healthy"
-        	})
+		self.speak_dialog("patient.read",data={"patient_data" : "patient is healthy"})
 
 
     # The "handle_xxxx_intent" function is triggered by Mycroft when the
