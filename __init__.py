@@ -36,12 +36,12 @@ class TemplateSkill(MycroftSkill):
         #self.register_intent(greetings, self.handle_greetings)
 
     def handle_patient_read(self):
-		response = requests.get('http://hapi.fhir.org/baseDstu3/Patient/4770074/_history/1?_pretty=true')
-		json_data = json.loads(response.text)
-		details = json_data['name']
-		for d in details:
-			full_name = d['text']
-			break
+    	response = requests.get('http://hapi.fhir.org/baseDstu3/Patient/4770074/_history/1?_pretty=true')
+    	json_data = json.loads(response.text)
+    	details = json_data['name']
+    	for d in details:
+    		full_name = d['text']
+    		break
 		self.speak_dialog("patient.read",data={"patient_data" : full_name})
         # Sending a command to mycroft, speak Greetings Dialog
 
