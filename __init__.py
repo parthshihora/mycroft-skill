@@ -42,7 +42,7 @@ class TemplateSkill(MycroftSkill):
     	for d in details:
     		full_name = d['text']
     		break
-		self.speak_dialog("patient.read",data={"patient_data" : full_name})
+    	self.speak_dialog("patient.read",data={"patient_data" : full_name})
         # Sending a command to mycroft, speak Greetings Dialog
 
 
