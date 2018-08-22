@@ -27,10 +27,10 @@ class TemplateSkill(MycroftSkill):
         # Initialize working variables used within the skill.
         self.count = 0
 
-    def initialize(self):
+    '''def initialize(self):
         # Creating GreetingsIntent requiring Greetings vocab
         patients = IntentBuilder("ReadPatientIntent").require("Patient").require.("name").build()
-        self.register_intent(patients,self.handle_patient_read)
+        self.register_intent(patients,self.handle_patient_read)'''
         # Associating a callback with the Intent
 
     @intent_handler(IntentBuilder("").require("Patient").require("name"))
