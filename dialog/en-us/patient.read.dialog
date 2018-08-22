@@ -1,1 +1,1 @@
-{{ patient_data }}
+I found {{ total }} patients

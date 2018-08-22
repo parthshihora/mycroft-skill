@@ -1,0 +1,3 @@
+find patient named (?P<name>.*)
+get detail of patient named (?P<name>.*)
+

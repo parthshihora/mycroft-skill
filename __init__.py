@@ -29,20 +29,18 @@ class TemplateSkill(MycroftSkill):
 
     def initialize(self):
         # Creating GreetingsIntent requiring Greetings vocab
-        #greetings = IntentBuilder("GreetingsIntent").require("Hello").build()
-        patients = IntentBuilder("ReadPatientIntent").require("Patient").build()
+        patients = IntentBuilder("ReadPatientIntent").require("Patient").require.("name").build()
         self.register_intent(patients,self.handle_patient_read)
         # Associating a callback with the Intent
-        #self.register_intent(greetings, self.handle_greetings)
 
-    def handle_patient_read(self):
-    	response = requests.get('http://hapi.fhir.org/baseDstu3/Patient/4770074/_history/1?_pretty=true')
+    @intent_handler(IntentBuilder("").require("Patient").require("name"))
+    def handle_patient_read(self,message):
+    	name = message.data['name']
+    	url = 'http://hapi.fhir.org/baseDstu3/Patient?phonetic='+name+'&_pretty=true'
+		response = requests.get(url)
     	json_data = json.loads(response.text)
-    	details = json_data['name']
-    	for d in details:
-    		full_name = d['text']
-    		break
-    	self.speak_dialog("patient.read",data={"patient_data" : full_name})
+    	total = json_data['total']
+    	self.speak_dialog("patient.read",data={"total" : total})
         # Sending a command to mycroft, speak Greetings Dialog
 
 
