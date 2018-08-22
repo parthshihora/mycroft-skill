@@ -37,11 +37,12 @@ class TemplateSkill(MycroftSkill):
     def handle_patient_read(self,message):
     	name = message.data['name']
     	url = 'http://hapi.fhir.org/baseDstu3/Patient?phonetic='+name+'&_pretty=true'
-		response = requests.get(url)
+    	response = requests.get(url)
     	json_data = json.loads(response.text)
     	total = json_data['total']
     	self.speak_dialog("patient.read",data={"total" : total})
-        # Sending a command to mycroft, speak Greetings Dialog
+
+		# Sending a command to mycroft, speak Greetings Dialog
 
 
     # The "handle_xxxx_intent" function is triggered by Mycroft when the
