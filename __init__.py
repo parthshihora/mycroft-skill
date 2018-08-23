@@ -33,14 +33,23 @@ class TemplateSkill(MycroftSkill):
         self.register_intent(patients,self.handle_patient_read)'''
         # Associating a callback with the Intent
 
-    @intent_handler(IntentBuilder("").require("Patient").require("name"))
+
+
+    @intent_handler(IntentBuilder("").require("Patient").require("firstname").require("lastname"))
     def handle_patient_read(self,message):
-    	name = message.data['name']
-    	url = 'http://hapi.fhir.org/baseDstu3/Patient?phonetic='+name+'&_pretty=true'
-    	response = requests.get(url)
-    	json_data = json.loads(response.text)
-    	total = json_data['total']
-    	self.speak_dialog("patient.read",data={"total" : total})
+        firstname = message.data['firstname']
+        lastname = message.data['lastname']
+        url = 'http://hapi.fhir.org/baseDstu3/Patient?phonetic='+firstname+'&'+'phonetic='+lastname+'&_pretty=true'
+        response = requests.get(url)
+        json_data = json.loads(response.text)
+        birthdatelist = list()
+        for x in range(len(json_data['entry'])):
+            birthdatelist.append(json_data['entry'][x]['resource']['birthDate'])
+
+        #birthdate = json_data['entry'][0]['resource']['birthDate']
+        self.speak_dialog("patient.read",data={"birthdate" : birthdatelist})
+
+
 
 		# Sending a command to mycroft, speak Greetings Dialog
 
