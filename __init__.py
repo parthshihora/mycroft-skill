@@ -48,6 +48,15 @@ class TemplateSkill(MycroftSkill):
 
         #birthdate = json_data['entry'][0]['resource']['birthDate']
         self.speak_dialog("patient.read",data={"birthdate" : birthdatelist})
+        handle_filter_patient(json_data)
+
+    
+
+    @intent_handler(IntentBuilder("").require("PatientJSON"))
+    def handle_filter_patient(self,message,json_data):
+    	self.speak_dialog("respond")
+
+
 
 
 
