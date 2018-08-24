@@ -47,7 +47,7 @@ class TemplateSkill(MycroftSkill):
 
 
     @intent_handler(IntentBuilder("").require("PatientFilter").require("firstname").require("lastname").require("birthyear"))
-    def handle_total_patient(self,message):
+    def handle_filtered_patient(self,message):
         firstname = message.data['firstname']
         lastname = message.data['lastname']
         birthyear = message.data['birthyear']
