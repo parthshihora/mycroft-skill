@@ -5,9 +5,9 @@ Query FHIR Server to get Patient detail
 This skill will query one  of the FHIR test servers to get the patient details using API provided by server. It is useful to get patients name, gender, birth year.
 
 ## Examples 
-* ""find patient named <firstname> <lastname>""
-* ""get detail of patient named <firstname> <lastname>""
-* ""get detail of patient <fistname> <lastname> with birthyear <birthyear>"
+* "find patient named <firstname> <lastname>"
+* "get detail of patient named <firstname> <lastname>"
+* "get detail of patient <fistname> <lastname> with birthyear <birthyear>"
 
 ## Credits 
 Parth Shihora(parthshihora)
