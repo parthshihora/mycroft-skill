@@ -62,7 +62,7 @@ class TemplateSkill(MycroftSkill):
             if "birthDate" in keys:
                 year = json_data['entry'][x]['resource']['birthDate'].split('-')[0]
                 if(year == birthyear):
-                	f = 1
+                    f = 1
                     gender = json_data['entry'][x]['resource']['gender']
                     break
         if(f==1):
