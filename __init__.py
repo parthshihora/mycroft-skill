@@ -43,8 +43,7 @@ class TemplateSkill(MycroftSkill):
         response = requests.get(url)
         json_data = json.loads(response.text)
         total = json_data['total']
-        
-        self.speak_dialog("TotalPatient",data={"total" : total})
+        self.speak_dialog("TotalPatient",data={"total" : total} )
 
 
     @intent_handler(IntentBuilder("").require("PatientFilter").require("firstname").require("lastname").require("birthyear"))
@@ -66,9 +65,9 @@ class TemplateSkill(MycroftSkill):
                     gender = json_data['entry'][x]['resource']['gender']
                     break
         if(f==1):
-            self.speak_dialog("PatintDetail",data={"gender" : gender})
+            self.speak_dialog("PatientDetail",data={"gender" : gender})
         else:
-            self.speak_dialog("PatintNotFound")
+            self.speak_dialog("PatientNotFound")
 
 
 
