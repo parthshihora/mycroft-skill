@@ -36,25 +36,49 @@ class TemplateSkill(MycroftSkill):
 
 
     @intent_handler(IntentBuilder("").require("Patient").require("firstname").require("lastname"))
-    def handle_patient_read(self,message):
+    def handle_total_patient(self,message):
         firstname = message.data['firstname']
         lastname = message.data['lastname']
         url = 'http://hapi.fhir.org/baseDstu3/Patient?phonetic='+firstname+'&'+'phonetic='+lastname+'&_pretty=true'
         response = requests.get(url)
         json_data = json.loads(response.text)
-        birthdatelist = list()
-        for x in range(len(json_data['entry'])):
-            birthdatelist.append(json_data['entry'][x]['resource']['birthDate'])
+        total = json_data['total']
+        
+        self.speak_dialog("TotalPatient",data={"total" : total})
 
-        #birthdate = json_data['entry'][0]['resource']['birthDate']
-        self.speak_dialog("patient.read",data={"birthdate" : birthdatelist})
-        handle_filter_patient(json_data)
+
+    @intent_handler(IntentBuilder("").require("PatientFilter").require("firstname").require("lastname").require("birthyear"))
+    def handle_total_patient(self,message):
+        firstname = message.data['firstname']
+        lastname = message.data['lastname']
+        birthyear = message.data['birthyear']
+        url = 'http://hapi.fhir.org/baseDstu3/Patient?phonetic='+firstname+'&'+'phonetic='+lastname+'&_pretty=true'
+        response = requests.get(url)
+        json_data = json.loads(response.text)
+        f = 0
+        
+        for x in range(len(json_data['entry'])):
+            keys = json_data['entry'][x]['resource'].keys()
+            if "birthDate" in keys:
+                year = json_data['entry'][x]['resource']['birthDate'].split('-')[0]
+                if(year == birthyear):
+                	f = 1
+                    gender = json_data['entry'][x]['resource']['gender']
+                    break
+        if(f==1):
+            self.speak_dialog("PatintDetail",data={"gender" : gender})
+        else:
+            self.speak_dialog("PatintNotFound")
+
+
+
+
+
+        
 
     
 
-    @intent_handler(IntentBuilder("").require("PatientJSON"))
-    def handle_filter_patient(self,message,json_data):
-    	self.speak_dialog("respond")
+    
 
 
 
