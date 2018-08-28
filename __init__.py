@@ -62,28 +62,17 @@ class TemplateSkill(MycroftSkill):
                 year = json_data['entry'][x]['resource']['birthDate'].split('-')[0]
                 if(year == birthyear):
                     f = 1
-                    gender = json_data['entry'][x]['resource']['gender']
+                    Id = json_data['entry'][x]['resource']['id']
+                    url2 = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+Id+'&_pretty=true'
+                    response2 = requests.get(url2)
+                    json_data2 = json.loads(response2.text)
+                    med = json_data2['entry'][0]['resource']['medicationCodeableConcept']['text']
                     break
         if(f==1):
-            self.speak_dialog("PatientDetail",data={"gender" : gender})
+            self.speak_dialog("PatientDetail",data={"med" : med})
         else:
             self.speak_dialog("PatientNotFound")
-
-
-
-
-
-        
-
-    
-
-    
-
-
-
-
-
-		# Sending a command to mycroft, speak Greetings Dialog
+        # Sending a command to mycroft, speak Greetings Dialog
 
 
     # The "handle_xxxx_intent" function is triggered by Mycroft when the

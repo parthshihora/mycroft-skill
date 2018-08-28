@@ -1,1 +1,1 @@
-patient is {{ gender }}
+patient is prescribed {{ med }}
