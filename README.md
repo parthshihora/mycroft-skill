@@ -1,19 +1,20 @@
-To submit your skill, replace this file with text from 
-https://rawgit.com/MycroftAI/mycroft-skills/master/meta_editor.html
+# <img src='https://rawgithub.com/FortAwesome/Font-Awesome/master/advanced-options/raw-svg/solid/robot.svg ' card_color='#40dbb0' width='50' height='50' style='vertical-align:bottom'/> FHIR - Skill
+Query FHIR Server to get Patient detail
 
-
-## YOUR SKILL NAME
-One line description of the skill
-
-## Description 
-A more verbose description, including any extra instructions or
-information that didn't fit in the one line.
+## About 
+This skill will query one  of the FHIR test servers to get the patient details using API provided by server. It is useful to get patients name, gender, birth year.
 
 ## Examples 
-* "Hello world"
-* "Greetings planet earth"
-* "Count up"
-* "Count down"
+* "find patient named <firstname> <lastname>"
+* "get detail of patient named <firstname> <lastname>"
+* "get detail of patient <fistname> <lastname> with birthyear <birthyear>"
 
 ## Credits 
-Your name
+Parth Shihora(parthshihora)
+
+## Category
+**Information**
+
+## Tags
+#fhir
+#patientdetail
