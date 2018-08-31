@@ -77,7 +77,7 @@ class TemplateSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("PatientMed"))
     def handle_patient_med(self,message):
-    	patient_id = self.patientId
+        patient_id = self.patientId
         url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+patient_id+'&_pretty=true'
         response = requests.get(url)
         json_data = json.loads(response.text)
