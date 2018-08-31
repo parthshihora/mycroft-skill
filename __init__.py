@@ -81,7 +81,7 @@ class TemplateSkill(MycroftSkill):
         url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+patient_id+'&_pretty=true'
         response = requests.get(url)
         json_data = json.loads(response.text)
-        med = json_data2['entry'][0]['resource']['medicationCodeableConcept']['text']
+        med = json_data['entry'][0]['resource']['medicationCodeableConcept']['text']
         self.speak_dialog("PatientMed",data={"med":med})
 
 
