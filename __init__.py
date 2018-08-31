@@ -43,7 +43,7 @@ class TemplateSkill(MycroftSkill):
         response = requests.get(url)
         json_data = json.loads(response.text)
         total = json_data['total']
-        self.speak_dialog("TotalPatient",data={"total" : total} )
+        self.speak_dialog("TotalPatient",data={"total" : total})
 
 
     @intent_handler(IntentBuilder("").require("PatientFilter").require("firstname").require("lastname").require("birthyear"))
@@ -63,15 +63,31 @@ class TemplateSkill(MycroftSkill):
                 if(year == birthyear):
                     f = 1
                     Id = json_data['entry'][x]['resource']['id']
-                    url2 = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+Id+'&_pretty=true'
-                    response2 = requests.get(url2)
-                    json_data2 = json.loads(response2.text)
-                    med = json_data2['entry'][0]['resource']['medicationCodeableConcept']['text']
+                    self.patientId = Id
                     break
+                    #url2 = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+Id+'&_pretty=true'
+                    #response2 = requests.get(url2)
+                    #json_data2 = json.loads(response2.text)
+                    #med = json_data2['entry'][0]['resource']['medicationCodeableConcept']['text']
+                    #break
         if(f==1):
-            self.speak_dialog("PatientDetail",data={"med" : med})
+            self.speak_dialog("PatientFound")
         else:
             self.speak_dialog("PatientNotFound")
+
+    @intent_handler(IntentBuilder("").require("PatientMed"))
+    def handle_patient_med(self,message):
+    	patient_id = self.patientId
+        url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+patient_id+'&_pretty=true'
+        response = requests.get(url)
+        json_data = json.loads(response.text)
+        med = json_data2['entry'][0]['resource']['medicationCodeableConcept']['text']
+        self.speak_dialog("PatientMed",data={"med":med})
+
+
+
+
+
         # Sending a command to mycroft, speak Greetings Dialog
 
 
