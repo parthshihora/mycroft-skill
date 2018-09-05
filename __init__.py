@@ -78,6 +78,7 @@ class TemplateSkill(MycroftSkill):
     @intent_handler(IntentBuilder("").require("PatientMed"))
     def handle_patient_med(self,message):
         patient_id = self.patientId
+        print("**********",patient_id)
         url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+patient_id+'&_pretty=true'
         response = requests.get(url)
         json_data = json.loads(response.text)
@@ -87,6 +88,7 @@ class TemplateSkill(MycroftSkill):
     @intent_handler(IntentBuilder("").require("PatientAppointment"))
     def handle_patient_appointment(self,message):
         patient_id = self.patientId
+        print("**********",patient_id)
         url = 'http://hapi.fhir.org/baseDstu3/Appointment?patient='+patient_id+'&_pretty=true'
         response = requests.get(url)
         json_data = json.loads(response.text)
