@@ -84,6 +84,18 @@ class TemplateSkill(MycroftSkill):
         med = json_data['entry'][0]['resource']['medicationCodeableConcept']['text']
         self.speak_dialog("PatientMed",data={"med":med})
 
+    @intent_handler(IntentBuilder("").require("PatientAppointment"))
+    def handle_patient_appointment(self,message):
+        patient_id = self.patientId
+        url = 'http://hapi.fhir.org/baseDstu3/Appointment?patient='+patient_id+'&_pretty=true'
+        response = requests.get(url)
+        json_data = json.loads(response.text)
+        latest_appointment = len(json_data['entry'])-1
+        start_date = json_data['entry'][latest_appointment]['resource']['start']
+        #print(json_data['entry'][latest_appointment]['resource']['end'])
+        place = json_data['entry'][latest_appointment]['resource']['participant'][0]['actor']['display']
+        self.speak_dialog("PatientAppointment",data={"start_date":start_date,"place":place})
+
 
 
 
