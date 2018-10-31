@@ -84,8 +84,8 @@ class TemplateSkill(MycroftSkill):
         response = requests.get(url)
         json_data = json.loads(response.text)
         print("***** json here", json_data)
-        #med = json_data['entry'][0]['resource']['medicationCodeableConcept']['text']
-        med = json_data['medicationCodeableConcept']['text']
+        med = json_data['entry'][0]['resource']['medicationCodeableConcept']['text']
+        #med = json_data['medicationCodeableConcept']['text']
         print("******* med is here", med)
         self.speak_dialog("PatientMed",data={"med":med})
 
