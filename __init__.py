@@ -79,8 +79,8 @@ class TemplateSkill(MycroftSkill):
     def handle_patient_med(self,message):
         patient_id = self.patientId
         print("**********",patient_id)
-       # url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+patient_id+'&_pretty=true'
-        url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement/'+patient_id
+        url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement?patient='+patient_id+'&_pretty=true'
+        #url = 'http://hapi.fhir.org/baseDstu3/MedicationStatement/'+patient_id
         response = requests.get(url)
         json_data = json.loads(response.text)
         print("***** json here", json_data)
