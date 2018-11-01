@@ -1,2 +1,3 @@
 get (?P<firstname>.*) (?P<lastname>.*) with birthyear (?P<birthyear>.*)
 find (?P<firstname>.*) (?P<lastname>.*) with birthyear (?P<birthyear>.*)
+find (?P<firstname>.*) (?P<lastname>.*) with birth year (?P<birthyear>.*)
